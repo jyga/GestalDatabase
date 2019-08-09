@@ -43,6 +43,7 @@ public class GestalDatabase {
 
             //close the result set
             resultSet.close();
+            
             //example retrieving all table names
             resultSet = connection.getMetaData().getTables(null, null, null, new String[]{"TABLE"});
             while (resultSet.next()) {
