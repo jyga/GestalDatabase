@@ -26,7 +26,7 @@ public class GestalDatabase {
             //here it is constructed based on program execution location
             //default Gestal installation database is in folder:
             //C:\Program Files (x86)\JYGA Technologies\Gestal\GestalDB
-            //then is added the database nase "GestalSS" and user name "guest"
+            //then is added the database name "GestalSS" and user name "guest"
             Connection connection = DriverManager.getConnection(
                     "jdbc:derby:" + dbDir + File.separator + "GestalSS;user=guest");
 
