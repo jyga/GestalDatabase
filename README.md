@@ -4,6 +4,7 @@ Sample Java application showing how to connect to the Gestal database.
 ## Requirements
 - A Java IDE of your choice (ex: Eclipse, NetBeans, ItelliJ IDEA) with its requirements (JDK)
 - This repository
+- A Gestal database (the `/GestalDB` folder in the Gestal installation folder)
 
 ## Setup
 - Clone the repository
