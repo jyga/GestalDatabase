@@ -1,5 +1,5 @@
 # GestalDatabase
-Sample Java application showing how to connect to the Gestal database
+Sample Java application showing how to connect to the Gestal database.
 
 ## Requirements
 - A Java IDE of your choice (ex: Eclipse, NetBeans, ItelliJ IDEA) with its requirements (JDK)
@@ -13,4 +13,4 @@ Sample Java application showing how to connect to the Gestal database
 - Run the GestalDatabase class
 
 ## Notes
-- Required Apache Derby databases are included in the `/lib` folder, but can also be downloaded from https://db.apache.org/derby/derby_downloads.html 
+- Required Apache Derby databases are included in the `/lib` folder, but can also be downloaded from: https://db.apache.org/derby/derby_downloads.html 
