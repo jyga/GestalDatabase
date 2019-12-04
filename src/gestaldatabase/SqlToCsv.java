@@ -34,7 +34,7 @@ public class SqlToCsv extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("SQL to CSV");
 
-        JTextField SqlCommand = new JTextField();
+        JTextField SqlCommand = new JTextField("SELECT * FROM APP.TRUIE");
         SqlCommand.setPreferredSize(new Dimension(500, 27));
 
         JButton ButtonExport = new JButton("Export to CSV...");
