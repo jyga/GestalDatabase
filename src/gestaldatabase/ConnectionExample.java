@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class GestalDatabase {
+public class ConnectionExample {
 
     public final String dbDir = (System.getProperty("user.dir") + File.separator + "GestalDB");
 
@@ -14,10 +14,10 @@ public class GestalDatabase {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new GestalDatabase();
+        new ConnectionExample();
     }
 
-    public GestalDatabase() {
+    public ConnectionExample() {
         try {
             //invoke driver instance
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
