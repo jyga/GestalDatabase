@@ -27,10 +27,31 @@ public class SqlToCsv extends JFrame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new SqlToCsv();
+        new SqlToCsv(args);
     }
 
-    public SqlToCsv() {
+    public SqlToCsv(String[] args) {
+        if(args!=null && args.length!=0)
+            CLI(args);
+        else
+            GUI();
+    }
+    
+    private void CLI(String[] args){
+        try{
+            if(args.length == 3){
+                int Result = ExportToCsv(args[0], args[1], new File(args[2] + ".csv"));
+                System.exit(Result);
+            }
+            else
+                System.exit(1);
+        }
+        catch (Exception e) {
+            System.exit(-1);
+        }
+    }
+        
+    private void GUI(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("SQL to CSV");
 
@@ -41,7 +62,10 @@ public class SqlToCsv extends JFrame {
         ButtonExport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ExportToCsv(SqlCommand.getText());
+                int Result = ExportToCsv(dbDir, SqlCommand.getText(), null);
+                if(Result == 0)
+                    JOptionPane.showMessageDialog(null, "Query successfully  exported",
+                            "Success", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
@@ -56,7 +80,8 @@ public class SqlToCsv extends JFrame {
                 dim.height / 2 - this.getSize().height / 2);
     }
 
-    private void ExportToCsv(String Sql) {
+    private int ExportToCsv(String DBPath, String Sql, File ExportFile) {
+        int Result = -1;
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
@@ -64,11 +89,12 @@ public class SqlToCsv extends JFrame {
         OutputStreamWriter outputStreamWriter = null;
 
         try {
-            File file = GetExportationFile();
-            if (file != null) {
+            if(ExportFile == null)
+                ExportFile = GetExportationFile();
+            if (ExportFile != null) {
                 Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
                 connection = DriverManager.getConnection(
-                        "jdbc:derby:" + dbDir + File.separator + "GestalSS;user=guest");
+                        "jdbc:derby:" + DBPath + File.separator + "GestalSS;user=guest");
                 statement = connection.createStatement();
                 resultSet = statement.executeQuery(Sql);
 
@@ -93,12 +119,11 @@ public class SqlToCsv extends JFrame {
                     stringBuffer.append(System.lineSeparator());
                 }
 
-                fileOutputStream = new FileOutputStream(file);
+                fileOutputStream = new FileOutputStream(ExportFile);
                 outputStreamWriter = new OutputStreamWriter(fileOutputStream);
                 outputStreamWriter.write(stringBuffer.toString());
-
-                JOptionPane.showMessageDialog(null, "Query successfully  exported",
-                        "Success", JOptionPane.INFORMATION_MESSAGE);
+                
+                Result = 0;
             }
         }
         catch (Exception e) {
@@ -121,6 +146,7 @@ public class SqlToCsv extends JFrame {
             catch (Exception e) {
             }
         }
+        return Result;
     }
 
     private File GetExportationFile() {
